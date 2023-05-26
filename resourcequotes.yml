@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Generate resourcequotes.yml
+cat <<EOF > resourcequotes.yml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+  namespace: $NAMESPACE_1
+spec:
+  hard:
+    pods: "10"
+    requests.cpu: "4"
+    requests.memory: 8Gi
+    limits.cpu: "8"
+    limits.memory: 16Gi
+EOF

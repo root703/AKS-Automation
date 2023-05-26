@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Read input namespace names and roles
+NAMESPACE_1="dev"
+NAMESPACE_2="prod"
+ROLE_1="viewer"
+ROLE_2="editor"
+
+# Generate rolebinding.yml
+cat <<EOF > rolebinding.yml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: $NAMESPACE_1-rolebinding
+  namespace: $NAMESPACE_1
+subjects:
+- kind: User
+  name: user1
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: $ROLE_1
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: $NAMESPACE_2-rolebinding
+  namespace: $NAMESPACE_2
+subjects:
+- kind: User
+  name: user2
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: $ROLE_2
+  apiGroup: rbac.authorization.k8s.io
+EOF

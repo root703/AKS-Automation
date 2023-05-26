@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Read input namespace names
+NAMESPACE_1="dev"
+NAMESPACE_2="prod"
+
+# Generate namespace.yml
+cat <<EOF > namespace.yml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: $NAMESPACE_1
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: $NAMESPACE_2
+EOF
